@@ -1,8 +1,85 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Wprawka_1.Models.User>
+
+@{
+    ViewData["Title"] = "Podgląd Bazy Danych";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h1 class="text-center mb-5">Wizualizacja Bazy Danych (Wprawka 1)</h1>
+
+    <div class="card mb-5 border-primary">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Użytkownicy i Nieruchomości (Relacja 1..N)</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Imię i Nazwisko / Email</th>
+                        <th>Adresy Domów (Powiązane 1:N)</th>
+                        <th>Klastry (Powiązane N:M)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td><strong>@user.Id</strong></td>
+                            <td>@user.FullName <br /><small class="text-muted">@user.Email</small></td>
+                            <td>
+                                @if (user.Homes != null && user.Homes.Any())
+                                {
+                                    <ul class="list-unstyled">
+                                        @foreach (var home in user.Homes)
+                                        {
+                                            <li>@home.Address <span class="badge bg-secondary text-xs">ID: @home.Id</span></li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+
+                                    <span class="text-danger">Brak domów</span>
+                                }
+                            </td>
+                            <td>
+                                @foreach (var cluster in user.Clusters)
+                                {
+                                    <span class="badge bg-warning text-dark">@cluster.Name</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card border-success">
+        <div class="card-header bg-success text-white">
+            <h3 class="mb-0">Struktura Klastrów (Relacja N..M)</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var cluster in ViewBag.Clusters)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="border p-3 rounded bg-light">
+                            <h5>@cluster.Name</h5>
+                            <hr />
+                            <p><strong>Członkowie:</strong></p>
+                            @foreach (var member in cluster.Users)
+                            {
+                                <span class="badge bg-dark">@member.FullName</span>
+                            }
+                            @if (!((List<Wprawka_1.Models.User>)cluster.Users).Any())
+                            {
+                                <span class="text-muted italic">Brak członków</span>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
