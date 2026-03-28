@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Wprawka_2.Models.Device>
+
+<h1>Lista Urządzeń (Filtrowana)</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj Nowe Urządzenie</a>
+</p>
+
+<!-- WŁASNY FORMULARZ FILTRUJĄCY -->
+<form method="get" asp-action="Index" class="mb-4 bg-light p-3 rounded">
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <label class="form-label font-weight-bold">Filtruj po Klastrze:</label>
+        </div>
+        <div class="col-md-4">
+            <select name="filterClusterId" class="form-control" asp-items="ViewBag.FilterClusterId">
+                <option value="0">-- Pokaż wszystkie --</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-secondary">Filtruj</button>
+        </div>
+        <div class="col-auto text-muted text-sm">
+            (Twój wybór zostanie zapamiętany w Sesji aplikacji)
+        </div>
+    </div>
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeviceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PowerWatt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cluster)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeviceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PowerWatt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cluster.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
