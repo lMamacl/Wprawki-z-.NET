@@ -48,13 +48,17 @@ Repozytorium zawiera realizację zadań laboratoryjnych (Wprawek) w technologii 
 
 ![Screenshot Wprawka 2 - Tabela z filtrem](/images/wprawka2.png)
 *(Opis: Strona główna z panelami filtrowania i tabelą urządzeń)*
+
+![Screenshot Wprawka 2 - Formularz i Walidacja](/images/wprawka2_form.png)
+*(Opis: Widok formularza dodawania urządzenia. Prezentuje działającą walidację danych wejściowych opartą na DataAnnotations oraz obsługę relacji poprzez dynamicznie ładowaną listę rozwijaną "Klaster")*
+
 ---
 
 ## Opis sposobu przetestowania funkcjonalności
 
 Aby w pełni zweryfikować poprawne działanie aplikacji oraz spełnienie wymagań Wprawki 2, wykonaj następujące kroki po uruchomieniu projektu:
 
-2. **Testowanie operacji CRUD i relacji w formularzach (Wprawka 2):**
+2. **Testowanie operacji CRUD i relacji w formularzach:**
    - Przejdź do zakładki **Urządzenia** (`/Devices`).
    - Kliknij **"Dodaj Nowe Urządzenie" (Create New)**.
    - Zwróć uwagę na pole "Klaster" – jest to dynamiczna lista rozwijana (dropdown), która pobiera powiązane obiekty bezpośrednio z bazy danych, co potwierdza prawidłową obsługę relacji.
@@ -79,9 +83,9 @@ Aby w pełni zweryfikować poprawne działanie aplikacji oraz spełnienie wymaga
 
 ---
 
-## Ściąga do prezentacji (Ewentualne pytania)
+## Ewentualne pytania
 
-| O co może zapytać prowadząca? | Twoja odpowiedź |
+| Pytanie | Odpowiedź |
 | :--- | :--- |
 | **Gdzie jest Many-to-Many?** | W `AppDbContext.cs` w metodzie `OnModelCreating` zdefiniowałem relację `User` <-> `Cluster` za pomocą Fluent API. |
 | **Jak działa zapamiętywanie filtra?** | Użyłem mechanizmu Sesji. W kontrolerze sprawdzam `HttpContext.Session.GetInt32("SavedFilter")`. Jeśli tam jest wartość, aplikacja filtruje listę automatycznie. |
