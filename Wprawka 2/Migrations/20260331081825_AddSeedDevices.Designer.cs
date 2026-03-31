@@ -11,8 +11,8 @@ using Wprawka_2.Data;
 namespace Wprawka_2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260328155149_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260331081825_AddSeedDevices")]
+    partial class AddSeedDevices
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,6 +90,13 @@ namespace Wprawka_2.Migrations
                             ClusterId = 1,
                             DeviceName = "Pompa Ciepła Alpha",
                             PowerWatt = 4500
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClusterId = 2,
+                            DeviceName = "Pompa Ciepła Beta",
+                            PowerWatt = 2500
                         });
                 });
 

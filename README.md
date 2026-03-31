@@ -48,6 +48,26 @@ Repozytorium zawiera realizację zadań laboratoryjnych (Wprawek) w technologii 
 
 ![Screenshot Wprawka 2 - Tabela z filtrem](/images/wprawka2.png)
 *(Opis: Strona główna z panelami filtrowania i tabelą urządzeń)*
+---
+
+## Opis sposobu przetestowania funkcjonalności
+
+Aby w pełni zweryfikować poprawne działanie aplikacji oraz spełnienie wymagań Wprawki 2, wykonaj następujące kroki po uruchomieniu projektu:
+
+2. **Testowanie operacji CRUD i relacji w formularzach (Wprawka 2):**
+   - Przejdź do zakładki **Urządzenia** (`/Devices`).
+   - Kliknij **"Dodaj Nowe Urządzenie" (Create New)**.
+   - Zwróć uwagę na pole "Klaster" – jest to dynamiczna lista rozwijana (dropdown), która pobiera powiązane obiekty bezpośrednio z bazy danych, co potwierdza prawidłową obsługę relacji.
+   - Przetestuj opcje **Edit**, **Details** oraz **Delete** dla nowo utworzonego rekordu.
+
+3. **Testowanie walidacji danych wejściowych:**
+   - Będąc w formularzu dodawania urządzenia, spróbuj wysłać puste dane lub wpisz wartość w polu "Moc (W)" poza zakresem `1 - 10000` (np. `-50`).
+   - Aplikacja zablokuje zapis i wyświetli na czerwono odpowiednie komunikaty o błędach, wygenerowane na podstawie atrybutów `DataAnnotations`.
+
+4. **Testowanie filtrowania i zarządzania sesją (Pamięć stanu):**
+   - Na liście urządzeń (`/Devices`) wybierz konkretny klaster z górnego panelu filtrów i kliknij **"Filtruj"**. Tabela pokaże tylko wybrane urządzenia.
+   - **Test Sesji:** Przejdź do widoku szczegółów (`Details`) dowolnego urządzenia z przefiltrowanej listy, a następnie kliknij "Wstecz do listy" (Back to List).
+   - **Wynik:** Lista nadal będzie poprawnie przefiltrowana. Kontroler odczytał Twój wybór z `HttpContext.Session`, co udowadnia działanie mechanizmu zarządzania stanem.
 
 ---
 

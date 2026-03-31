@@ -87,6 +87,13 @@ namespace Wprawka_2.Migrations
                             ClusterId = 1,
                             DeviceName = "Pompa Ciepła Alpha",
                             PowerWatt = 4500
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClusterId = 2,
+                            DeviceName = "Pompa Ciepła Beta",
+                            PowerWatt = 2500
                         });
                 });
 

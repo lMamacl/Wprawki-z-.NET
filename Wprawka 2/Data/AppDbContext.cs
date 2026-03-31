@@ -30,7 +30,8 @@ namespace Wprawka_2.Data
 
             // Opcjonalnie: Możemy też dodać od razu testowe urządzenie przypisane do Klastra nr 1
             modelBuilder.Entity<Device>().HasData(
-                new Device { Id = 1, DeviceName = "Pompa Ciepła Alpha", PowerWatt = 4500, ClusterId = 1 }
+                new Device { Id = 1, DeviceName = "Pompa Ciepła Alpha", PowerWatt = 4500, ClusterId = 1 },
+                new Device { Id = 2, DeviceName = "Pompa Ciepła Beta", PowerWatt = 2500, ClusterId = 2 }
             );
         }
     }
